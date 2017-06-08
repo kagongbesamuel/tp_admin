@@ -1,0 +1,111 @@
+From: "Saved by Internet Explorer 11"
+Subject: 
+Date: Fri, 9 Jun 2017 23:56:53 -0700
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://raw.githubusercontent.com/kagongbesa/tpe_shell_admin/master/sys.sh
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17514
+
+=EF=BB=BF<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "" ""><HTML><HEAD><META content=3D"IE=3D11.0000"=20
+http-equiv=3D"X-UA-Compatible">
+
+<META http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8">
+<META name=3D"GENERATOR" content=3D"MSHTML 11.00.9600.17842"></HEAD>
+<BODY>
+<PRE>#!/bin/bash=0A=
+=0A=
+clear=0A=
+sleep 5 =0A=
+echo " Nom de l'etudiant :  Kagongbe samuel | Matricule : 08M804FS"=0A=
+echo " "  =0A=
+echo "BIENVENUE SUR MON PROJET SYS"=0A=
+echo " "=0A=
+echo "CHOISIR L'OPTION A EXECUTER" =0A=
+echo " "                                                                 =
+    =0A=
+echo " a) Informations sur les utilisateurs enregistr=C3=A9s il ya 3 =
+jours"=0A=
+echo " " =0A=
+echo " b) acquisition, installation et lancement de l'environement xampp"=0A=
+echo " " =0A=
+echo " c) archivage des el=C3=A9ments du repertoire personnel qui ont =
+=C3=A9t=C3=A9 modifi=C3=A9  par  le sudoer il ya 2 jours"=0A=
+echo " " =0A=
+echo " d) informations d'utilisation du disque, de la memoire du =
+processeur et du swap"=0A=
+echo " " =0A=
+echo "quitter(Q/q)"=0A=
+=0A=
+           =0A=
+=0A=
+       =0A=
+read -r n=0A=
+=0A=
+case $n in =0A=
+	=0A=
+=0A=
+	'a') cut -d : -f 1 /etc/passwd&gt;all_user=0A=
+	=0A=
+=0A=
+	ls /home&gt;user_foders=0A=
+	=0A=
+	while read line =0A=
+	do=0A=
+		while read line1=0A=
+		do	=0A=
+		if [ $line =3D=3D $line1 ] ; then =0A=
+		echo $line1&gt;user1=0A=
+		fi=0A=
+		done&lt;user_foders=0A=
+	done&lt;all_users=0A=
+	find /home/* -type d -ctime 3 -print&gt;userx=0A=
+=0A=
+	while read line1=0A=
+	do=0A=
+	   while read user=0A=
+	   do =0A=
+	      if [ $line1 =3D=3D '/home/'$user ] ; then =0A=
+		echo $user &gt;3days_user.txt=0A=
+		echo " --&gt; cr=C3=A9=C3=A9 il y a 3 jours."=0A=
+	      fi=0A=
+=0A=
+	    done&lt;user1 =0A=
+	done&lt;userx=0A=
+	cat 3days_users.txt=0A=
+	=0A=
+ ;;=0A=
+	'b') echo "t=C3=A9l=C3=A9chargement de xampp, installation et demarrage =
+de xampp"=0A=
+	 wget =
+https://downloadsapachefriends.global.ssl.fastly.net/xampp-files/5.6.30/x=
+ampp-linux-x64-5.6.30-1-installer.run?from_af=3Dtrue=0A=
+	 ./xampp-linux-x64-5.6.30-1-installer.run=0A=
+	 sudo su=0A=
+	/opt/lampp/lampp start=0A=
+=0A=
+=0A=
+;;=0A=
+	'c') echo "archivage des =C3=A9l=C3=A9ments du repertoire personnel"=0A=
+	mkdir -p /home/seed/archive=0A=
+	find /home/seed/ -type f -mtime 2 -print&gt;/home/seed/ficmodi=0A=
+	while read line=0A=
+	do=0A=
+	cp $line archive=0A=
+	done &lt;/home/seed/ficmodi=0A=
+	tar -czvf archive.tar.gz archive=0A=
+	mv archive.tar.gz /media/seed/usb/*/archive.tar.gz=0A=
+	;;=0A=
+	'd') echo "Informations sur l'utilisation du disque, de la memoire et =
+du swap :"=0A=
+	    echo "disque : "=0A=
+		df -h |grep /dev/sd=0A=
+		echo "M=C3=A9moire et swap : "=0A=
+		free -h =0A=
+;;=0A=
+	* )  exit;;=0A=
+	=0A=
+esac</PRE></BODY></HTML>
